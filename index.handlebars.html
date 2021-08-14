@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LeetCode Questions Sortable by Likes</title>
+    <style>
+        /* From https://www.kryogenix.org/code/browser/sorttable/#symbolsbeforesorting */
+        table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after {
+            content: " \25B4\25BE"
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        .center-text {
+            text-align: center
+        }
+
+        .selectionDiv {
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+<script>
+    function optionChange(option, columnIdx) {
+        document.querySelectorAll('tbody tr').forEach(el => {
+            const column = el.querySelector(`td:nth-child(${columnIdx})`);
+
+            const shouldShow = option.value === 'All' || option.value === column.textContent;
+
+            if (shouldShow) {
+                el.counter &= ~(1 << columnIdx);
+            } else {
+                el.counter |= 1 << columnIdx;
+            }
+
+            el.style.display = el.counter === 0 ? '' : 'none';
+        });
+    }
+</script>
+<h1>LeetCode Questions Sortable By Likes</h1>
+<noscript>If you enable JavaScript, you'll be able to sort and filter the table.</noscript>
+
+<div class="selectionDiv">
+    <label for="status">Status: </label>
+    <select id="status" onchange="optionChange(this, 2)">
+        <option selected>All</option>
+        <option>✅</option>
+        <option>➖</option>
+    </select>
+</div>
+
+<div class="selectionDiv">
+    <label for="premium">Premium: </label>
+    <select id="premium" onchange="optionChange(this, 3)">
+        <option selected>All</option>
+        <option>🆓</option>
+        <option>💰</option>
+    </select>
+</div>
+
+<table class="sortable">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Status</th>
+        <th>Premium</th>
+        <th>Title</th>
+        <th>Likes</th>
+        <th>Dislikes</th>
+        <th>Ratio</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#each questions}}
+    <tr counter="0">
+        <td>{{questionId}}</td>
+        <td class="center-text">{{#if done}}✅{{else}}➖{{/if}}</td>
+        <td class="center-text">{{#if premium}}💰{{else}}🆓{{/if}}</td>
+        <td><a href="{{url}}">{{title}}</a></td>
+        <td>{{likes}}</td>
+        <td>{{dislikes}}</td>
+        <td>{{likesRatio}}</td>
+    </tr>
+    {{/each}}
+    </tbody>
+</table>
+
+<footer>Generated {{time}}</footer>
+<!-- https://www.kryogenix.org/code/browser/sorttable -->
+<script src="resources/js/sorttable.js" async></script>
+</body>
+</html>

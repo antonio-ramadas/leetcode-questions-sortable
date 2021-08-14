@@ -1,0 +1,16 @@
+{
+  "name": "leetcode-likes-sortable",
+  "version": "1.0.0",
+  "description": "Sort LeetCode problems by number of likes",
+  "main": "index.js",
+  "scripts": {
+    "build": "node .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "António Ramadas",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "handlebars": "^4.7.7"
+  }
+}
