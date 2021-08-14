@@ -1,2 +1,5 @@
 # Project exclude paths
 /node_modules/
+
+# This is a generated file
+index.html
