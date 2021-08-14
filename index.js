@@ -76,7 +76,7 @@ axios(config)
                 }
             });
 
-        fs.writeFileSync('./resources/index.html', template({time: time, total: total, questions: questions}));
+        fs.writeFileSync('./public/index.html', template({time: time, total: total, questions: questions}));
     })
     .catch(function (error) {
         console.log(error);
